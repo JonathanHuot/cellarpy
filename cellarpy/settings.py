@@ -43,7 +43,7 @@ def load_logfile(logfile, dirs=[]):
     logging.debug('Log file start')
 
 
-def load_settings(settingsfile, dirs=[]):
+def load_settings(settingsfile, dirs=[], storage_dirs=[]):
     config_file = setreadablefile(dirs, settingsfile)
     with open(config_file) as fd:
         import json
@@ -51,7 +51,7 @@ def load_settings(settingsfile, dirs=[]):
 
     if "storage" in settings:
         for name, folder in settings["storage"].iteritems():
-            settings["storage"][name] = setwritabledirectory([folder, path.join(path.dirname(path.realpath(__file__)), name)])
+            settings["storage"][name] = setwritabledirectory([folder] + [path.join(storage, name) for storage in storage_dirs])
             if name == "database" and settings["sqlite"][name][0] != '/':
                 settings["sqlite"][name] = path.join(settings["storage"][name], settings["sqlite"][name])
 
