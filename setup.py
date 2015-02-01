@@ -15,7 +15,7 @@ setup(
     keywords = "bottle web wsgi",
     url = "https://github.com/JonathanHuot/cellarpy",
     packages=['cellarpy'],
-    long_description=read('README'),
+    long_description=read('README.md'),
     classifiers=[
         'Development Status :: 4 - Beta',
         'Intended Audience :: Developers',

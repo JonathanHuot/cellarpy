@@ -25,6 +25,7 @@ def setreadablefile(folders, filename):
             return os.access(path.join(directory, filename), os.R_OK)
         return False
 
+
     for dir in folders:
         if(isreadable(dir, filename)):
             return path.join(dir, filename)
@@ -33,8 +34,8 @@ def setreadablefile(folders, filename):
 
 
 # Initiate logging
-def load_logfile(logfile, extradirs=[]):
-    log_dir = setwritabledirectory(extradirs + [path.dirname(path.realpath(__file__))])
+def load_logfile(logfile, dirs=[]):
+    log_dir = setwritabledirectory(dirs)
     logging.basicConfig(level=logging.DEBUG,
                         filename=path.join(log_dir, logfile),
                         format='%(asctime)s +%(msecs)d [%(process)d] %(levelname)s %(message)s',
@@ -42,8 +43,8 @@ def load_logfile(logfile, extradirs=[]):
     logging.debug('Log file start')
 
 
-def load_settings(settingsfile, extradirs=[]):
-    config_file = setreadablefile(extradirs + [path.join(path.dirname(path.realpath(__file__)))], settingsfile)
+def load_settings(settingsfile, dirs=[]):
+    config_file = setreadablefile(dirs, settingsfile)
     with open(config_file) as fd:
         import json
         settings = json.load(fd)
