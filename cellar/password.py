@@ -1,5 +1,4 @@
-from settings import settings
 import hashlib
 
 
-hashpassword = lambda text: hashlib.sha512(settings["secret"]["salt"] + text).hexdigest()
+hashpassword = lambda text, salt: hashlib.sha512(salt + text).hexdigest()
