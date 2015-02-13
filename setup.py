@@ -6,7 +6,7 @@ def read(fname):
     return open(os.path.join(os.path.dirname(__file__), fname)).read()
 
 setup(
-    name = "cellarpy",
+    name = "cellar",
     version = "0.1",
     author = "Jonathan Huot",
     author_email = "jonathan.huot@gmail.com",
@@ -14,7 +14,7 @@ setup(
     license = "MIT",
     keywords = "bottle web wsgi",
     url = "https://github.com/JonathanHuot/cellarpy",
-    packages=['cellarpy'],
+    packages=['cellar'],
     long_description=read('README.md'),
     classifiers=[
         'Development Status :: 4 - Beta',
