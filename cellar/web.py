@@ -25,13 +25,13 @@ def guess_type(filename, resp=response):
         resp.headers['Content-Type'] = mimetype
 
 
-def static_file(filename, root):
+def static_file(filename, root, *args, **kwargs):
     '''
     Revised version of bottle static_file
     e.g. handle woff2 extension only ATM
     '''
     from bottle import static_file as bottle_static_file
-    resp = bottle_static_file(filename, root)
+    resp = bottle_static_file(filename, root, *args, **kwargs)
     if "Content-Type" not in response.headers:
         guess_type(filename, resp)
     return resp
