@@ -4,6 +4,7 @@ from bottle import MakoTemplate
 from bottle import CheetahTemplate
 from bottle import Jinja2Template
 import functools
+import logging
 
 
 def guess_type(filename, resp=response):
@@ -44,9 +45,11 @@ def generate_less_from_css(filename, root, cache=None):
 
     css_cache = path.join(cache, filename)
     less_file = path.join(root, filename.replace(".css", ".less"))
-    if not fs.static_file_exists(css_cache, filename) or \
+    if not fs.static_file_exists(cache, filename) or \
        path.getmtime(less_file) > path.getmtime(css_cache):
+        logging.debug("Cache version of {0} doesn't exist or is outdated.".format(css_cache))
         with open(css_cache, 'w') as fd:
+            logging.debug("Write lessc output for {0} to {1}".format(less_file, css_cache))
             call(["lessc", less_file], stdout=fd)
     return static_file(filename, root=cache)
 
