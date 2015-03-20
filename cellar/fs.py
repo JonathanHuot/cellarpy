@@ -1,5 +1,4 @@
 import os
-from bottle import HTTPError
 
 
 def iswritable(directory):
@@ -21,7 +20,7 @@ def static_file_exists(root, filename):
     filename = os.path.abspath(os.path.join(root, filename.strip('/\\')))
 
     if not filename.startswith(root):
-        return HTTPError(403, "Access denied.")
+        return False
     if not os.path.exists(filename) or not os.path.isfile(filename):
         return False
     return True
