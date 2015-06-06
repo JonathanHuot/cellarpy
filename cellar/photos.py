@@ -2,7 +2,7 @@ from PIL import Image
 from PIL import ImageOps
 
 
-def _transpose_exif_orientation(src, dst):
+def __transpose_exif_orientation(src, dst):
     def get_exif(img):
         from PIL.ExifTags import TAGS
         ret = {}
@@ -40,6 +40,14 @@ def _transpose_exif_orientation(src, dst):
             # Rotation 90°
             dst = dst.transpose(Image.ROTATE_90)
     return dst
+
+
+def _transpose_exif_orientation(src, dst):
+    try:
+        return __transpose_exif_orientation(src, dst)
+    except:
+        // no exif present, no jpeg?
+        return dst
 
 
 def resize_fixed_size(src, dest, width, height):
