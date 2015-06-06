@@ -46,7 +46,7 @@ def _transpose_exif_orientation(src, dst):
     try:
         return __transpose_exif_orientation(src, dst)
     except:
-        // no exif present, no jpeg?
+        # no exif present, no jpeg?
         return dst
 
 
