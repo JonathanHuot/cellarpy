@@ -7,7 +7,7 @@ def read(fname):
 
 setup(
     name = "cellarpy",
-    version = "0.1",
+    version = "1.0",
     author = "Jonathan Huot",
     author_email = "jonathan.huot@gmail.com",
     description = ("cellarpy empower python web-applications based on bottlepy"),
@@ -17,10 +17,11 @@ setup(
     packages=['cellar'],
     long_description=read('README.md'),
     classifiers=[
-        'Development Status :: 4 - Beta',
+        'Development Status :: 5 - Production/Stable',
         'Intended Audience :: Developers',
         'License :: OSI Approved :: MIT License',
         'Topic :: Software Development :: Libraries :: Application Frameworks',
+        'Framework :: Bottle',
         'Programming Language :: Python :: 2.6',
         'Programming Language :: Python :: 2.7',
         'Programming Language :: Python :: 3',
