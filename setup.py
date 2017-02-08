@@ -5,15 +5,16 @@ from setuptools import setup
 def read(fname):
     return open(os.path.join(os.path.dirname(__file__), fname)).read()
 
+
 setup(
-    name = "cellarpy",
-    version = "1.0",
-    author = "Jonathan Huot",
-    author_email = "jonathan.huot@gmail.com",
-    description = ("cellarpy empower python web-applications based on bottlepy"),
-    license = "MIT",
-    keywords = "bottle web wsgi",
-    url = "https://github.com/JonathanHuot/cellarpy",
+    name="cellarpy",
+    version="1.1",
+    author="Jonathan Huot",
+    author_email="jonathan.huot@gmail.com",
+    description=("cellarpy empower python web-applications based on bottlepy"),
+    license="MIT",
+    keywords="bottle web wsgi",
+    url="https://github.com/JonathanHuot/cellarpy",
     packages=['cellar'],
     long_description=read('README.md'),
     classifiers=[
