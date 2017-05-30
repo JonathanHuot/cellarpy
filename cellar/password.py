@@ -1,4 +1,5 @@
 import hashlib
 
 
-hashpassword = lambda text, salt: hashlib.sha512(salt + text).hexdigest()
+def hashpassword(text, salt):
+    return hashlib.sha512("{0}|{1}".format(salt, text).encode('utf-8')).hexdigest()

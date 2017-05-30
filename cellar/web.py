@@ -7,7 +7,7 @@ import functools
 import logging
 
 
-def guess_type(filename, resp=response):
+def guess_type(filename, headers):
     '''
     Try to guess Content-Encoding/Content-Type, and set it to current response
     '''
@@ -23,18 +23,18 @@ def guess_type(filename, resp=response):
     if mimetype:
         if mimetype[:5] == 'text/' and charset and 'charset' not in mimetype:
             mimetype += '; charset=%s' % charset
-        resp.headers['Content-Type'] = mimetype
+        headers['Content-Type'] = mimetype
 
 
 def static_file(filename, root, *args, **kwargs):
     '''
     Revised version of bottle static_file
-    e.g. handle woff2 extension only ATM
+    changelog: add support for woff2 extension
     '''
     from bottle import static_file as bottle_static_file
     resp = bottle_static_file(filename, root, *args, **kwargs)
     if "Content-Type" not in response.headers:
-        guess_type(filename, resp)
+        guess_type(filename, resp.headers)
     return resp
 
 
@@ -67,7 +67,7 @@ def generate_static_file(filename, root, *args, **kwargs):
     if fs.static_file_exists(root, filename):
         return static_file(filename, root=root)
 
-    guess_type(filename)
+    guess_type(filename, response.headers)
     return template(filename, *args, **kwargs)
     
 
