@@ -1,6 +1,6 @@
 import unittest
 import bottle
-import cellar
+import cellar.menu
 
 
 appmenu = bottle.Bottle()

@@ -1,7 +1,13 @@
 import unittest
-import cellar
+import cellar.web
 import tempfile
 from os import path
+
+
+try:
+    from tempfile import TemporaryDirectory
+except ImportError:
+    from backports.tempfile import TemporaryDirectory
 
 
 sample_less = b"""@nice-blue: #5B83AD;
@@ -24,7 +30,7 @@ hello {{name}}
 
 class test_web(unittest.TestCase):
     def test_less(self):
-        with tempfile.TemporaryDirectory() as cachepath:
+        with TemporaryDirectory() as cachepath:
             with tempfile.NamedTemporaryFile() as temp:
                 temp.write(sample_less)
                 temp.flush()
@@ -33,7 +39,9 @@ class test_web(unittest.TestCase):
                     path.dirname(temp.name),
                     cachepath
                 )
-                css = str(response.body.read(), 'utf-8')
+                css = response.body.read()
+                if not isinstance(css, str):
+                    css = str(css, 'utf-8')
                 with open(path.join(cachepath, path.basename(temp.name))) as fd:
                     cached = fd.read()
                 self.assertEqual(css, sample_css, "css has not been correctly generated")

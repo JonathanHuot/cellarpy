@@ -1,5 +1,5 @@
 import unittest
-import cellar
+import cellar.password
 
 
 class test_password(unittest.TestCase):
