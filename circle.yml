@@ -1,3 +1,6 @@
+machine:
+  environment:
+    COVERALLS_REPO_TOKEN: qJaHs6LtKVUC2SJcnDev0acWLtPuW1vXM
 test:
   override:
     - tox
