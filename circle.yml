@@ -3,9 +3,7 @@ machine:
     COVERALLS_REPO_TOKEN: qJaHs6LtKVUC2SJcnDev0acWLtPuW1vXM
 dependencies:
   pre:
-    - npm install less
-    - mkdir -p /home/ubuntu/bin/
-    - ln -fs /home/ubuntu/node_modules/less/bin/lessc /home/ubuntu/bin/
+    - sudo npm -g install less
 test:
   override:
     - tox
