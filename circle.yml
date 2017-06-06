@@ -1,10 +1,11 @@
 machine:
   environment:
     COVERALLS_REPO_TOKEN: qJaHs6LtKVUC2SJcnDev0acWLtPuW1vXM
-    PATH: $PATH:$HOME/node_modules/less/bin
 dependencies:
   pre:
     - npm install less
+    - mkdir -p /home/ubuntu/bin/
+    - ln -fs /home/ubuntu/node_modules/less/bin/lessc /home/ubuntu/bin/
 test:
   override:
     - tox
