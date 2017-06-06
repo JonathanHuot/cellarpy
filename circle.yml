@@ -4,7 +4,7 @@ machine:
   node:
     version: 6.1.0
 dependencies:
-  pre:
+  override:
     - sudo npm install -g less
 test:
   override:
