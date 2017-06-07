@@ -31,6 +31,19 @@ class test_settings(unittest.TestCase):
             )
             self.assertEqual(foo, bar, "loaded settings must be equal to dict")
 
+    def test_fromenv(self):
+        with tempfile.NamedTemporaryFile() as temp:
+            foo = {"x": 12}
+            json.dump(foo, temp)
+            temp.flush()
+
+            try:
+                os.environ["CELLAR_SETTINGS"] = temp.name
+                bar = cellar.settings.load_settings()
+                self.assertEqual(foo, bar, "loaded settings must be equal to dict")
+            finally:
+                del os.environ["CELLAR_SETTINGS"]
+
     def test_readperm(self):
         with TemporaryDirectory() as dir1:
             with TemporaryDirectory() as dir2:

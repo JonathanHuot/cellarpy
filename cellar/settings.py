@@ -25,7 +25,6 @@ def setreadablefile(folders, filename):
             return os.access(path.join(directory, filename), os.R_OK)
         return False
 
-
     for dir in folders:
         if(isreadable(dir, filename)):
             return path.join(dir, filename)
@@ -34,7 +33,12 @@ def setreadablefile(folders, filename):
 
 
 # Initiate logging
-def load_logfile(logfile, dirs=[]):
+def load_logfile(logfile=None, dirs=[]):
+    fromenv = os.getenv("CELLAR_LOGS", None)
+    if fromenv:
+        logfile = path.basename(fromenv)
+        dirs = [path.dirname(fromenv)]
+
     log_dir = setwritabledirectory(dirs)
     logging.basicConfig(level=logging.DEBUG,
                         filename=path.join(log_dir, logfile),
@@ -43,7 +47,16 @@ def load_logfile(logfile, dirs=[]):
     logging.debug('Log file start')
 
 
-def load_settings(settingsfile, dirs=[], storage_dirs=[]):
+def load_settings(settingsfile=None, dirs=[], storage_dirs=[]):
+    fromenv = os.getenv("CELLAR_SETTINGS", None)
+    if fromenv:
+        settingsfile = path.basename(fromenv)
+        dirs = [path.dirname(fromenv)]
+
+    fromenv = os.getenv("CELLAR_STORAGE", None)
+    if fromenv:
+        storage_dirs = fromenv.split(";")
+
     config_file = setreadablefile(dirs, settingsfile)
     with open(config_file) as fd:
         import json
