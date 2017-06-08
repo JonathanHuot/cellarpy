@@ -18,6 +18,7 @@ setup(
     packages=['cellar'],
     test_suite="tests",
     long_description=read('README.md'),
+    install_requires=read('requirements.txt').split('\n'),
     classifiers=[
         'Development Status :: 5 - Production/Stable',
         'Intended Audience :: Developers',
