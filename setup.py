@@ -8,7 +8,7 @@ def read(fname):
 
 setup(
     name="cellarpy",
-    version="1.2",
+    version="1.3",
     author="Jonathan Huot",
     author_email="jonathan.huot@gmail.com",
     description=("cellarpy empower python web-applications based on bottlepy"),
