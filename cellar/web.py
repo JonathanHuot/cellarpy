@@ -17,7 +17,7 @@ def guess_type(filename, headers):
     mimetype, encoding = mimetypes.guess_type(filename)
     if not mimetype and filename.find(".woff2"):
         mimetype, encoding = mimetypes.guess_type(filename + ".woff")
-        
+
     if encoding: headers['Content-Encoding'] = encoding
 
     if mimetype:

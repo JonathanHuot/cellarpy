@@ -14,7 +14,7 @@ except ImportError:
 
 class test_settings(unittest.TestCase):
     def test_load(self):
-        with tempfile.NamedTemporaryFile() as temp:
+        with tempfile.NamedTemporaryFile(mode='w+') as temp:
             foo = {
                 "x": 12,
                 "y": [
@@ -32,7 +32,7 @@ class test_settings(unittest.TestCase):
             self.assertEqual(foo, bar, "loaded settings must be equal to dict")
 
     def test_fromenv(self):
-        with tempfile.NamedTemporaryFile() as temp:
+        with tempfile.NamedTemporaryFile(mode='w+') as temp:
             foo = {"x": 12}
             json.dump(foo, temp)
             temp.flush()

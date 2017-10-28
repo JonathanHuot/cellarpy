@@ -63,7 +63,7 @@ def load_settings(settingsfile=None, dirs=[], storage_dirs=[]):
         settings = json.load(fd)
 
     if "storage" in settings:
-        for name, folder in settings["storage"].iteritems():
+        for name, folder in settings["storage"].items():
             settings["storage"][name] = setwritabledirectory([folder] + [path.join(storage, name) for storage in storage_dirs])
             if name == "database" and settings["sqlite"][name][0] != '/':
                 settings["sqlite"][name] = path.join(settings["storage"][name], settings["sqlite"][name])
