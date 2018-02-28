@@ -4,7 +4,14 @@ jobs:
     docker:
       - image: circleci/python:3.6.4-jessie-node
     steps:
-      - run: sudo pip install tox
+      - run: sudo pip install tox coveralls
       - run: sudo npm install -g less
       - checkout
       - run: tox
+      - run:
+          name: Run coverage
+          command: |
+            coverage run --source=cellar setup.py test
+            coveralls
+          environment:
+            COVERALLS_REPO_TOKEN: qJaHs6LtKVUC2SJcnDev0acWLtPuW1vXM
