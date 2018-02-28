@@ -4,6 +4,6 @@ jobs:
     docker:
       - image: circleci/python:3.6.4-jessie-node
     steps:
-      - run: npm install -g less
+      - run: sudo npm install -g less
       - checkout
       - run: tox
