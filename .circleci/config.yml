@@ -7,7 +7,7 @@ jobs:
       - run: sudo pip install tox coveralls
       - run: sudo npm install -g less
       - checkout
-      - run: tox -e 3.6
+      - run: tox -e py36
       - run:
           name: Run coverage
           command: |
@@ -22,7 +22,7 @@ jobs:
       - run: sudo pip install tox
       - run: sudo npm install -g less
       - checkout
-      - run: tox -e 3.5
+      - run: tox -e py35
   2.7:
     docker:
       - image: hdoomsday/python-nodejs:2.7
@@ -30,7 +30,7 @@ jobs:
       - run: sudo pip install tox
       - run: sudo npm install -g less
       - checkout
-      - run: tox -e 2.7
+      - run: tox -e py27
 workflows:
   version: 2
   build:
