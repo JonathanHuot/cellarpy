@@ -1,13 +1,13 @@
 version: 2
 jobs:
-  build:
+  3.6:
     docker:
-      - image: circleci/python:3.6.4-jessie-node
+      - image: hdoomsday/python-nodejs:3.6
     steps:
       - run: sudo pip install tox coveralls
       - run: sudo npm install -g less
       - checkout
-      - run: tox
+      - run: tox -e 3.6
       - run:
           name: Run coverage
           command: |
@@ -15,3 +15,19 @@ jobs:
             coveralls
           environment:
             COVERALLS_REPO_TOKEN: qJaHs6LtKVUC2SJcnDev0acWLtPuW1vXM
+  3.5:
+    docker:
+      - image: hdoomsday/python-nodejs:3.5
+    steps:
+      - run: sudo pip install tox
+      - run: sudo npm install -g less
+      - checkout
+      - run: tox -e 3.5
+  2.7:
+    docker:
+      - image: hdoomsday/python-nodejs:2.7
+    steps:
+      - run: sudo pip install tox
+      - run: sudo npm install -g less
+      - checkout
+      - run: tox -e 2.7
