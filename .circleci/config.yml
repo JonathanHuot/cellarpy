@@ -3,6 +3,7 @@ jobs:
   build:
     docker:
       - image: hdoomsday/python-nodejs:3.6
+    steps:
       - checkout
   py36:
     docker:
