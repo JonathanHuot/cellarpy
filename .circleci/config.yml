@@ -1,27 +1,22 @@
 version: 2
 jobs:
+  build:
+    docker:
+      - image: hdoomsday/python-nodejs:3.6
+      - checkout
   3.6:
     docker:
       - image: hdoomsday/python-nodejs:3.6
     steps:
-      - run: sudo pip install tox coveralls
+      - run: sudo pip install tox
       - run: sudo npm install -g less
-      - checkout
       - run: tox -e py36
-      - run:
-          name: Run coverage
-          command: |
-            coverage run --source=cellar setup.py test
-            coveralls
-          environment:
-            COVERALLS_REPO_TOKEN: qJaHs6LtKVUC2SJcnDev0acWLtPuW1vXM
   3.5:
     docker:
       - image: hdoomsday/python-nodejs:3.5
     steps:
       - run: sudo pip install tox
       - run: sudo npm install -g less
-      - checkout
       - run: tox -e py35
   2.7:
     docker:
@@ -29,12 +24,36 @@ jobs:
     steps:
       - run: sudo pip install tox
       - run: sudo npm install -g less
-      - checkout
       - run: tox -e py27
+  coverage:
+    docker:
+      - image: hdoomsday/python-nodejs:3.6
+    steps:
+      - run: sudo pip install coveralls
+      - run: sudo npm install -g less
+      - run:
+          name: Run coverage
+          command: |
+            coverage run --source=cellar setup.py test
+            coveralls
+          environment:
+            COVERALLS_REPO_TOKEN: qJaHs6LtKVUC2SJcnDev0acWLtPuW1vXM
 workflows:
   version: 2
-  build:
+  build_and_test:
     jobs:
-      - 2.7
-      - 3.5
-      - 3.6
+      - build
+      - 2.7:
+          requires:
+            - build
+      - 3.5:
+          requires:
+            - build
+      - 3.6:
+          requires:
+            - build
+      - coverage:
+          requires:
+            - 2.7
+            - 3.5
+            - 3.6
