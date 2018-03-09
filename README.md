@@ -9,4 +9,4 @@ empower python web-applications based on bottlepy
 Quickstart
 ===============
 
-Settings helper
+Settings helper.
