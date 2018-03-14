@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from bottle import response
 from bottle import template
 from bottle import MakoTemplate

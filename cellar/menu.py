@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from bottle import app
 from bottle import request
 
